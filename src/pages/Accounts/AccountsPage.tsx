@@ -126,7 +126,7 @@ export default function AccountsPage() {
         <LoadingState variant="table" count={6} />
       ) : (
         <div className="animate-fade-in space-y-5">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="vo-stagger grid grid-cols-1 gap-4 sm:grid-cols-3">
             <StatCard label="A pagar" value={<Money value={totals.pending} />} icon={<Clock />} tone="warning" footer={`${counts.pending} conta${counts.pending === 1 ? '' : 's'} pendente${counts.pending === 1 ? '' : 's'}`} />
             <StatCard label="Atrasadas" value={<Money value={totals.overdue} />} icon={<CircleAlert />} tone="danger" footer={counts.overdue > 0 ? 'Regularize para evitar juros' : 'Nenhuma conta atrasada'} />
             <StatCard label="Pagas" value={<Money value={totals.paid} />} icon={<CircleCheck />} tone="success" footer={`${counts.paid} conta${counts.paid === 1 ? '' : 's'} quitada${counts.paid === 1 ? '' : 's'}`} />

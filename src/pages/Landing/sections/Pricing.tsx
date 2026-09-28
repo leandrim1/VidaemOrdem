@@ -4,6 +4,7 @@ import { PLAN_FEATURES, PLANS } from '@/data/plans'
 import { cn } from '@/lib/cn'
 import { PATHS } from '@/routes/paths'
 import { buttonClasses } from '@/components/ui/Button'
+import { Reveal } from '@/components/ui/Reveal'
 import { Container, SectionHeading } from './SectionHeading'
 
 export function Pricing() {
@@ -12,11 +13,14 @@ export function Pricing() {
       <Container>
         <SectionHeading id="precos-title" eyebrow="Oferta" title="Menos que um lanche por mês para ter a vida em ordem" description="Teste grátis por 7 dias, sem cartão e sem cobrança automática." />
         <div className="mx-auto mt-14 grid max-w-md grid-cols-1 gap-5 lg:max-w-5xl lg:grid-cols-3">
-          {PLANS.map((plan) => (
-            <div
-              key={plan.id}
-              className={cn('relative flex flex-col rounded-card border bg-surface p-7 shadow-card sm:p-8', plan.featured ? 'border-primary ring-1 ring-primary shadow-raised' : 'border-line')}
-            >
+          {PLANS.map((plan, i) => (
+            <Reveal variant="scale" delay={i * 110} key={plan.id}>
+              <div
+                className={cn(
+                  'relative flex h-full flex-col rounded-card border bg-surface p-7 shadow-card transition-[box-shadow,translate] duration-300 hover:-translate-y-1.5 hover:shadow-overlay sm:p-8',
+                  plan.featured ? 'border-primary shadow-raised ring-1 ring-primary' : 'border-line',
+                )}
+              >
               {plan.featured && <span className="absolute -top-3 left-7 rounded-full bg-primary px-3 py-1 text-xs font-bold text-white">Mais escolhido</span>}
               <h3 className="text-lg font-bold text-fg">Plano {plan.name}</h3>
               <p className="mt-4 flex flex-wrap items-baseline gap-x-1">
@@ -38,7 +42,8 @@ export function Pricing() {
               <Link to={PATHS.register} className={buttonClasses(plan.featured ? 'primary' : 'outline', 'lg', 'mt-8 w-full')}>
                 Começar 7 dias grátis
               </Link>
-            </div>
+              </div>
+            </Reveal>
           ))}
         </div>
         <ul className="mt-8 flex flex-col items-center justify-center gap-x-8 gap-y-2 text-center text-sm text-muted sm:flex-row">

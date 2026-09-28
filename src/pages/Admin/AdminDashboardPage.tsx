@@ -90,7 +90,7 @@ export default function AdminDashboardPage() {
         <LoadingState variant="page" />
       ) : (
         <div className="animate-fade-in space-y-5">
-          <section id="visao-geral" aria-label="Indicadores" className="grid scroll-mt-24 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
+          <section id="visao-geral" aria-label="Indicadores" className="vo-stagger grid scroll-mt-24 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
             {data.metrics.map((metric, index) => {
               const { icon: Icon, tone } = METRIC_STYLE[index] ?? METRIC_STYLE[0]
               return <StatCard key={metric.label} label={metric.label} value={formatMetric(metric)} icon={<Icon />} tone={tone} delta={{ value: metric.delta, label: 'vs. mês anterior' }} />

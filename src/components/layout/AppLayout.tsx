@@ -66,7 +66,12 @@ export function AppLayout() {
         <Header onOpenMenu={() => setDrawerOpen(true)} />
         <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-[1400px] flex-1 px-4 pt-6 pb-28 outline-none sm:px-6 md:pb-12 lg:px-8 lg:pt-8">
           <TrialBanner />
-          <Suspense fallback={<LoadingState variant="page" />}>{blocked && access ? <Paywall access={access} /> : <Outlet />}</Suspense>
+          <Suspense fallback={<LoadingState variant="page" />}>
+            {/* A chave reinicia a animação de entrada a cada troca de página. */}
+            <div key={pathname} className="animate-fade-up">
+              {blocked && access ? <Paywall access={access} /> : <Outlet />}
+            </div>
+          </Suspense>
         </main>
       </div>
 

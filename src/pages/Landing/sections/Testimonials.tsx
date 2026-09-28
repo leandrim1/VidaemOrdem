@@ -1,4 +1,5 @@
 import { Quote, Star } from 'lucide-react'
+import { Reveal } from '@/components/ui/Reveal'
 import { Container, SectionHeading } from './SectionHeading'
 
 const TESTIMONIALS = [
@@ -13,9 +14,9 @@ export function Testimonials() {
       <Container>
         <SectionHeading id="depoimentos-title" eyebrow="Depoimentos" title="Quem usa, recomenda" />
         <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
-          {TESTIMONIALS.map((t) => (
-            <li key={t.name}>
-              <figure className="flex h-full flex-col rounded-card border border-line bg-surface p-6 shadow-card">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal as="li" delay={i * 120} key={t.name}>
+              <figure className="flex h-full flex-col rounded-card border border-line bg-surface p-6 shadow-card transition-[box-shadow,translate] duration-300 hover:-translate-y-1 hover:shadow-raised">
                 <div className="flex items-center justify-between">
                   <div className="flex gap-0.5 text-warning" aria-label="Avaliação: 5 de 5 estrelas">
                     {Array.from({ length: 5 }, (_, i) => (
@@ -35,7 +36,7 @@ export function Testimonials() {
                   </span>
                 </figcaption>
               </figure>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </Container>

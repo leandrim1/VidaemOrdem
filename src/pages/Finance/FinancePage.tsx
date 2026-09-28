@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/Button'
 import { Card, CardHeader } from '@/components/ui/Card'
 import { ChartCard } from '@/components/ui/ChartCard'
 import { DataTable, type Column } from '@/components/ui/DataTable'
-import { Money } from '@/components/ui/Money'
+import { AnimatedMoney, Money } from '@/components/ui/Money'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { RowActions } from '@/components/ui/RowActions'
 import { SearchInput } from '@/components/ui/SearchInput'
@@ -143,14 +143,14 @@ export default function FinancePage() {
         <LoadingState variant="page" />
       ) : (
         <div className="animate-fade-in space-y-5">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
-            <StatCard label="Receitas" value={<Money value={summary.income} />} icon={<ArrowUpRight />} tone="success" delta={delta(summary.income, previous.income) !== undefined ? { value: delta(summary.income, previous.income) ?? 0, label: 'vs. mês anterior' } : undefined} />
-            <StatCard label="Despesas" value={<Money value={summary.expense} />} icon={<ArrowDownRight />} tone="danger" delta={delta(summary.expense, previous.expense) !== undefined ? { value: delta(summary.expense, previous.expense) ?? 0, label: 'vs. mês anterior', positiveIsGood: false } : undefined} />
-            <StatCard label="Saldo" value={<Money value={summary.balance} />} icon={<Scale />} tone="primary" footer={summary.balance >= 0 ? 'Mês no azul' : 'Atenção: mês no vermelho'} />
+          <div className="vo-stagger grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+            <StatCard label="Receitas" value={<AnimatedMoney value={summary.income} />} icon={<ArrowUpRight />} tone="success" delta={delta(summary.income, previous.income) !== undefined ? { value: delta(summary.income, previous.income) ?? 0, label: 'vs. mês anterior' } : undefined} />
+            <StatCard label="Despesas" value={<AnimatedMoney value={summary.expense} />} icon={<ArrowDownRight />} tone="danger" delta={delta(summary.expense, previous.expense) !== undefined ? { value: delta(summary.expense, previous.expense) ?? 0, label: 'vs. mês anterior', positiveIsGood: false } : undefined} />
+            <StatCard label="Saldo" value={<AnimatedMoney value={summary.balance} />} icon={<Scale />} tone="primary" footer={summary.balance >= 0 ? 'Mês no azul' : 'Atenção: mês no vermelho'} />
             <StatCard label="Economia" value={formatPercent(summary.savingsRate)} icon={<PiggyBank />} tone="warning" footer="da receita guardada" />
           </div>
 
-          <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+          <div className="vo-stagger grid grid-cols-1 gap-5 xl:grid-cols-2">
             <ChartCard title="Despesas por categoria" description="Distribuição dos gastos no mês">
               {categories.length === 0 ? (
                 <EmptyState compact icon={<Wallet />} title="Sem despesas no mês" description="Suas despesas aparecerão aqui por categoria." />

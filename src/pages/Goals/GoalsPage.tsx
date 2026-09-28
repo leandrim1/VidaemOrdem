@@ -8,7 +8,7 @@ import { confirm } from '@/stores/confirmStore'
 import { formatPercent, roundMoney } from '@/utils/format'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { Money } from '@/components/ui/Money'
+import { AnimatedMoney } from '@/components/ui/Money'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { StatCard } from '@/components/ui/StatCard'
 import { EmptyState, ErrorState, LoadingState } from '@/components/ui/States'
@@ -58,8 +58,8 @@ export default function GoalsPage() {
         <LoadingState variant="cards" count={3} />
       ) : (
         <div className="animate-fade-in space-y-5">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <StatCard label="Total guardado" value={<Money value={totals.saved} />} icon={<PiggyBank />} tone="success" footer={`${formatPercent(totals.percent)} de todas as metas`} />
+          <div className="vo-stagger grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <StatCard label="Total guardado" value={<AnimatedMoney value={totals.saved} />} icon={<PiggyBank />} tone="success" footer={`${formatPercent(totals.percent)} de todas as metas`} />
             <StatCard label="Em andamento" value={active.length} icon={<TrendingUp />} tone="primary" footer="metas ativas" />
             <StatCard label="Concluídas" value={completed.length} icon={<CircleCheck />} tone="warning" footer="metas alcançadas" />
           </div>
@@ -91,7 +91,7 @@ export default function GoalsPage() {
                 />
               </Card>
             ) : (
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 2xl:grid-cols-3">
+              <div className="vo-stagger grid grid-cols-1 gap-5 md:grid-cols-2 2xl:grid-cols-3">
                 {visible.map((goal) => (
                   <GoalCard key={goal.id} goal={goal} onContribute={setContributing} onEdit={editor.openEdit} onDelete={handleDelete} />
                 ))}

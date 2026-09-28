@@ -15,7 +15,7 @@ export function Card({ padding = 'md', interactive, as: Tag = 'div', className, 
       className={cn(
         'rounded-card border border-line bg-surface shadow-card',
         paddings[padding],
-        interactive && 'transition-[border-color,box-shadow] hover:border-line-strong hover:shadow-raised',
+        interactive && 'transition-[border-color,box-shadow,translate] duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-raised',
         className,
       )}
       {...props}

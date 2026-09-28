@@ -73,7 +73,7 @@ export default function DigitalOrganizationPage() {
             </div>
           </Card>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="vo-stagger grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {areas.map((area) => {
               const Icon = AREA_ICONS[area.value]
               const complete = area.total > 0 && area.done === area.total

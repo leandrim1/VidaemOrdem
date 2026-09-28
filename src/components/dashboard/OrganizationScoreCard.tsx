@@ -20,7 +20,7 @@ export function OrganizationScoreCard({ organization }: { organization: Organiza
         description={scoreMessage(organization.score)}
         className="mb-2"
         action={
-          <Tooltip content="Média de 5 áreas calculadas com seus dados: contas em dia, tarefas, hábitos, organização digital e checklists." side="bottom">
+          <Tooltip content="Média de 5 áreas calculadas com seus dados: contas em dia, tarefas, hábitos, organização digital e checklists." side="bottom" align="end">
             <button type="button" aria-label="Como o índice é calculado" className="flex size-8 items-center justify-center rounded-lg text-muted hover:bg-surface-2 hover:text-fg">
               <Info className="size-4" />
             </button>

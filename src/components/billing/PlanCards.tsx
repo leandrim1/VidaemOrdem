@@ -13,7 +13,7 @@ interface PlanCardsProps {
 /** Cards de planos usados na página "Meu plano" e na tela de fim do teste. */
 export function PlanCards({ currentPlan, onSelect, compact }: PlanCardsProps) {
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+    <div className="vo-stagger grid grid-cols-1 gap-4 lg:grid-cols-3">
       {PLANS.map((plan) => {
         const current = plan.id === currentPlan
         return (

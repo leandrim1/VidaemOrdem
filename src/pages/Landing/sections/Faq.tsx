@@ -1,4 +1,5 @@
 import { Accordion } from '@/components/ui/Accordion'
+import { Reveal } from '@/components/ui/Reveal'
 import { Container, SectionHeading } from './SectionHeading'
 
 const FAQ = [
@@ -16,7 +17,9 @@ export function Faq() {
     <section id="faq" aria-labelledby="faq-title" className="scroll-mt-16 py-20 sm:py-28">
       <Container className="max-w-3xl">
         <SectionHeading id="faq-title" eyebrow="Dúvidas frequentes" title="Perguntas frequentes" />
-        <Accordion items={FAQ} className="mt-12" />
+        <Reveal delay={100}>
+          <Accordion items={FAQ} className="mt-12" />
+        </Reveal>
       </Container>
     </section>
   )

@@ -1,4 +1,5 @@
 import { Clock, HeartHandshake, Lock, PiggyBank, Smartphone, TrendingUp } from 'lucide-react'
+import { Reveal } from '@/components/ui/Reveal'
 import { Container, SectionHeading } from './SectionHeading'
 
 const BENEFITS = [
@@ -16,16 +17,16 @@ export function Benefits() {
       <Container>
         <SectionHeading id="beneficios-title" eyebrow="Benefícios" title="Organização que muda o seu dia a dia" />
         <ul className="mt-14 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {BENEFITS.map((benefit) => (
-            <li key={benefit.title} className="flex gap-4">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-primary-ink shadow-xs">
+          {BENEFITS.map((benefit, i) => (
+            <Reveal as="li" delay={(i % 3) * 100} key={benefit.title} className="group flex gap-4">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-primary-ink shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <benefit.icon className="size-5" aria-hidden />
               </span>
               <div>
                 <h3 className="text-base font-bold text-fg">{benefit.title}</h3>
                 <p className="mt-1.5 text-[15px] leading-relaxed text-muted">{benefit.text}</p>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </Container>

@@ -113,7 +113,7 @@ export default function CardsPage() {
       ) : (
         <div className="animate-fade-in space-y-5">
           {cards.length > 0 && (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="vo-stagger grid grid-cols-1 gap-4 sm:grid-cols-3">
               <StatCard label="Limite total" value={<Money value={totals.limit} />} icon={<Wallet />} tone="primary" footer={`${cards.length} cart${cards.length === 1 ? 'ão' : 'ões'}`} />
               <StatCard label="Utilizado" value={<Money value={totals.used} />} icon={<Gauge />} tone="warning" footer={`${formatPercent(totals.percent)} do limite total`} />
               <StatCard label="Disponível" value={<Money value={totals.available} />} icon={<CreditCardIcon />} tone="success" footer="para novas compras" />
@@ -133,7 +133,7 @@ export default function CardsPage() {
               />
             </Card>
           ) : (
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div className="vo-stagger grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
               {cards.map((card) => (
                 <CardItem key={card.id} card={card} onEdit={() => editor.openEdit(card)} onDelete={() => void handleDelete(card)} />
               ))}

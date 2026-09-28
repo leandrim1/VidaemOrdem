@@ -40,7 +40,7 @@ export default function ChecklistsPage() {
               <ProgressBar value={overall.total ? (overall.done / overall.total) * 100 : 0} size="sm" label="Progresso geral dos checklists" className="mt-2.5" />
             </div>
           </Card>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="vo-stagger grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {checklists.map((checklist) => (
               <ChecklistCard key={checklist.id} checklist={checklist} onOpen={(c) => setOpenId(c.id)} />
             ))}

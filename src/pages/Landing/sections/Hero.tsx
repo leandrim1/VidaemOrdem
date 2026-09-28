@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, CircleCheck, Sparkles } from 'lucide-react'
+import { ArrowRight, CircleCheck, Receipt, Sparkles, Target } from 'lucide-react'
 import { PATHS } from '@/routes/paths'
 import { buttonClasses } from '@/components/ui/Button'
+import { CountUp } from '@/components/ui/CountUp'
 import { DashboardMockup } from '../mockups'
 import { Container } from './SectionHeading'
 
@@ -12,10 +13,57 @@ const AVATARS = [
   ['PS', 'bg-rose-600'],
 ] as const
 
+/** Cards que "flutuam" ao redor do mockup (apenas em telas largas). */
+function FloatingCards() {
+  return (
+    <div className="pointer-events-none absolute inset-0 hidden xl:block" aria-hidden>
+      <div className="absolute top-24 -left-32 animate-fade-up" style={{ animationDelay: '1.1s' }}>
+        <div className="flex animate-float items-center gap-3 rounded-2xl border border-line bg-surface p-3 pr-4 shadow-overlay">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-warning-soft text-warning-ink">
+            <Sparkles className="size-4" />
+          </span>
+          <div>
+            <p className="text-[13px] font-bold text-fg">+10 pontos</p>
+            <p className="text-[11px] text-muted">Tarefa concluída</p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute top-1/3 -right-20 animate-fade-up" style={{ animationDelay: '1.35s' }}>
+        <div className="flex animate-float-slow items-center gap-3 rounded-2xl border border-line bg-surface p-3 pr-4 shadow-overlay" style={{ animationDelay: '1.5s' }}>
+          <span className="flex size-9 items-center justify-center rounded-xl bg-primary-soft text-primary-ink">
+            <Receipt className="size-4" />
+          </span>
+          <div>
+            <p className="text-[13px] font-bold text-fg">Conta de luz</p>
+            <p className="text-[11px] text-muted">Vence amanhã · R$ 164,30</p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-12 -left-16 animate-fade-up" style={{ animationDelay: '1.6s' }}>
+        <div className="w-56 animate-float rounded-2xl border border-line bg-surface p-3.5 shadow-overlay" style={{ animationDelay: '0.8s' }}>
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-8 items-center justify-center rounded-lg bg-success-soft text-success-ink">
+              <Target className="size-4" />
+            </span>
+            <p className="flex-1 text-[13px] font-bold text-fg">Viagem para Lisboa</p>
+            <span className="text-[13px] font-bold text-fg">72%</span>
+          </div>
+          <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-success-soft">
+            <div className="vo-grow-x h-full w-[72%] rounded-full bg-success" style={{ animationDelay: '1.9s' }} />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] bg-[radial-gradient(60%_50%_at_50%_0%,var(--vo-primary-soft),transparent)]" aria-hidden />
+      <div className="pointer-events-none absolute top-24 left-1/2 -z-10 size-[520px] -translate-x-1/2" aria-hidden>
+        <div className="size-full animate-drift rounded-full bg-primary/10 blur-3xl" />
+      </div>
       <div
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(var(--vo-line)_1px,transparent_1px),linear-gradient(90deg,var(--vo-line)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_65%)]"
         aria-hidden
@@ -38,9 +86,9 @@ export function Hero() {
             Finanças, tarefas, metas e organização pessoal em um único sistema simples e fácil de usar.
           </p>
           <div className="mt-9 flex animate-fade-up flex-col justify-center gap-3 [animation-delay:180ms] sm:flex-row">
-            <Link to={PATHS.register} className={buttonClasses('primary', 'lg', 'px-7')}>
+            <Link to={PATHS.register} className={buttonClasses('primary', 'lg', 'group px-7')}>
               Começar agora
-              <ArrowRight className="size-4" aria-hidden />
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
             </Link>
             <a href="#plataforma" className={buttonClasses('outline', 'lg', 'px-7')}>
               Conhecer a plataforma
@@ -56,7 +104,10 @@ export function Hero() {
                 ))}
               </div>
               <span>
-                <strong className="font-semibold text-fg">+12 mil pessoas</strong> já organizadas
+                <strong className="font-semibold text-fg">
+                  <CountUp value={12} duration={1800} format={(v) => `+${Math.round(v)} mil pessoas`} />
+                </strong>{' '}
+                já organizadas
               </span>
             </div>
             <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1">
@@ -69,9 +120,12 @@ export function Hero() {
             </ul>
           </div>
         </div>
-        <div className="relative mx-auto mt-14 max-w-5xl animate-fade-up [animation-delay:300ms] sm:mt-20">
-          <div className="pointer-events-none absolute -inset-x-10 -bottom-10 top-10 -z-10 rounded-[40px] bg-primary/10 blur-3xl" aria-hidden />
-          <DashboardMockup />
+        <div className="relative mx-auto mt-14 max-w-5xl sm:mt-20">
+          <div className="pointer-events-none absolute -inset-x-10 -bottom-10 top-10 -z-10 animate-glow rounded-[40px] bg-primary/10 blur-3xl" aria-hidden />
+          <div className="vo-tilt-in" style={{ animationDelay: '300ms' }}>
+            <DashboardMockup />
+          </div>
+          <FloatingCards />
         </div>
       </Container>
     </section>

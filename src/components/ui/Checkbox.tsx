@@ -34,7 +34,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
         {...props}
       />
       <Check
-        className={cn('pointer-events-none absolute text-white opacity-0 transition-opacity peer-checked:opacity-100', iconSizes[size])}
+        className={cn('pointer-events-none absolute text-white opacity-0 transition-opacity peer-checked:animate-check peer-checked:opacity-100', iconSizes[size])}
         strokeWidth={3.5}
         aria-hidden
       />

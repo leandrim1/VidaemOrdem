@@ -6,7 +6,7 @@ import { capitalize, locale } from '@/utils/date'
 import { formatPercent } from '@/utils/format'
 import { format } from 'date-fns'
 import { Card } from '@/components/ui/Card'
-import { Money } from '@/components/ui/Money'
+import { AnimatedMoney, Money } from '@/components/ui/Money'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 
 export function BalanceCard({ summary, categories }: { summary: MonthSummary; categories: CategoryTotal[] }) {
@@ -20,7 +20,7 @@ export function BalanceCard({ summary, categories }: { summary: MonthSummary; ca
             <Wallet className="size-4" aria-hidden />
             Saldo do mês · {month}
           </p>
-          <Money
+          <AnimatedMoney
             value={summary.balance}
             className={summary.balance >= 0 ? 'mt-2 block font-display text-4xl font-extrabold tracking-tight text-fg' : 'mt-2 block font-display text-4xl font-extrabold tracking-tight text-danger-ink'}
           />
@@ -39,7 +39,7 @@ export function BalanceCard({ summary, categories }: { summary: MonthSummary; ca
             </span>
             Receitas
           </p>
-          <Money value={summary.income} className="mt-1.5 block text-lg font-bold text-fg" />
+          <AnimatedMoney value={summary.income} className="mt-1.5 block text-lg font-bold text-fg" />
         </div>
         <div className="rounded-xl bg-surface-2/70 p-3.5">
           <p className="flex items-center gap-1.5 text-[13px] font-medium text-muted">
@@ -48,7 +48,7 @@ export function BalanceCard({ summary, categories }: { summary: MonthSummary; ca
             </span>
             Despesas
           </p>
-          <Money value={summary.expense} className="mt-1.5 block text-lg font-bold text-fg" />
+          <AnimatedMoney value={summary.expense} className="mt-1.5 block text-lg font-bold text-fg" />
         </div>
       </div>
 

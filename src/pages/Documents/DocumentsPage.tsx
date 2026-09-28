@@ -141,7 +141,7 @@ export default function DocumentsPage() {
               />
             </Card>
           ) : (
-            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <ul className="vo-stagger grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {visible.map((doc) => {
                 const Icon = DOCUMENT_ICONS[doc.category]
                 return (

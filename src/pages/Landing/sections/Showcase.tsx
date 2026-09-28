@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { CircleCheck, Crosshair, Flame, ListChecks, Receipt } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { DigitalMockup, FinanceMockup, GoalsMockup, RoutineMockup } from '../mockups'
+import { Reveal } from '@/components/ui/Reveal'
 import { Container, SectionHeading } from './SectionHeading'
 
 interface ShowcaseProps {
@@ -23,15 +24,17 @@ function ShowcaseRow({ id, eyebrow, title, description, bullets, visual, reverse
           <div className={cn(reverse && 'lg:order-2')}>
             <SectionHeading id={`${id}-title`} align="left" eyebrow={eyebrow} title={title} description={description} />
             <ul className="mt-7 space-y-3">
-              {bullets.map((bullet) => (
-                <li key={bullet} className="flex items-start gap-3 text-[15px] text-fg-soft">
+              {bullets.map((bullet, i) => (
+                <Reveal as="li" variant={reverse ? 'right' : 'left'} delay={150 + i * 80} key={bullet} className="flex items-start gap-3 text-[15px] text-fg-soft">
                   <CircleCheck className="mt-0.5 size-5 shrink-0 text-success" aria-hidden />
                   {bullet}
-                </li>
+                </Reveal>
               ))}
             </ul>
           </div>
-          <div className={cn('mx-auto w-full max-w-md lg:max-w-none', reverse && 'lg:order-1')}>{visual}</div>
+          <Reveal variant={reverse ? 'left' : 'right'} delay={120} className={cn('mx-auto w-full max-w-md lg:max-w-none', reverse && 'lg:order-1')}>
+            {visual}
+          </Reveal>
         </div>
       </Container>
     </section>

@@ -6,6 +6,7 @@ import { Features } from './sections/Features'
 import { FinalCta } from './sections/FinalCta'
 import { Footer } from './sections/Footer'
 import { Hero } from './sections/Hero'
+import { ModulesMarquee } from './sections/ModulesMarquee'
 import { Navbar } from './sections/Navbar'
 import { Pricing } from './sections/Pricing'
 import { Problem } from './sections/Problem'
@@ -23,6 +24,7 @@ export default function LandingPage() {
       <Navbar />
       <main id="conteudo">
         <Hero />
+        <ModulesMarquee />
         <Problem />
         <Solution />
         <Features />

@@ -62,7 +62,7 @@ export default function DashboardPage() {
     <div className="animate-fade-in">
       {header}
 
-      <div className="grid grid-cols-1 gap-4 lg:gap-5 xl:grid-cols-12">
+      <div className="vo-stagger grid grid-cols-1 gap-4 lg:gap-5 xl:grid-cols-12">
         <div className="xl:col-span-5">
           <BalanceCard summary={finance.summary} categories={finance.categories} />
         </div>
@@ -108,7 +108,7 @@ export default function DashboardPage() {
           <UpcomingBillsCard bills={accounts.upcoming} overdueCount={accounts.totals.overdueCount} onPay={(bill) => void accounts.togglePaid(bill)} />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5 xl:col-span-12 xl:grid-cols-3">
+        <div className="vo-stagger grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5 xl:col-span-12 xl:grid-cols-3">
           <TodayTasksCard tasks={tasks.todayTasks} onToggle={tasks.toggleTask} />
           <GoalsSummaryCard goals={goals.active} />
           <HabitsSummaryCard habits={habits.habits} weeklyProgress={habits.weeklyProgress} onToggle={(habit) => void habits.toggle(habit)} />

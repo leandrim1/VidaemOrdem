@@ -61,7 +61,7 @@ export default function HabitsPage() {
         </Card>
       ) : (
         <div className="animate-fade-in space-y-5">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
+          <div className="vo-stagger grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
             <Card className="flex items-center gap-5">
               <ProgressRing value={weeklyProgress} size={96} stroke={9} label="Progresso semanal dos hábitos">
                 <span className="font-display text-xl font-extrabold text-fg">{weeklyProgress}%</span>
@@ -76,7 +76,7 @@ export default function HabitsPage() {
             <StatCard label="Maior sequência atual" value={`${best?.stats.currentStreak ?? 0} dias`} icon={<Trophy />} tone="warning" footer={best?.name} />
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="vo-stagger grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {habits.map((habit) => (
               <HabitCard key={habit.id} habit={habit} onToggle={toggle} onEdit={editor.openEdit} onDelete={handleDelete} />
             ))}

@@ -4,25 +4,57 @@
  * qualquer resolução e tema.
  */
 import { Bell, Check, CircleCheck, Flame, LayoutDashboard, ListChecks, Mail, Receipt, Smartphone, Target, Wallet, Camera, FolderOpen, Laptop, CalendarDays, Trophy } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import { cn } from '@/lib/cn'
+import { formatCurrency } from '@/utils/format'
+import { CountUp } from '@/components/ui/CountUp'
 import { LogoMark } from '@/components/ui/Logo'
 
-function Bar({ value, className = 'bg-primary', track = 'bg-primary-soft' }: { value: number; className?: string; track?: string }) {
+/* As animações usam atrasos escalonados para "montar" a tela aos poucos. */
+const delay = (ms: number): CSSProperties => ({ animationDelay: `${ms}ms` })
+
+function Bar({ value, className = 'bg-primary', track = 'bg-primary-soft', wait = 400 }: { value: number; className?: string; track?: string; wait?: number }) {
   return (
     <div className={cn('h-1.5 w-full overflow-hidden rounded-full', track)}>
-      <div className={cn('h-full rounded-full', className)} style={{ width: `${value}%` }} />
+      <div className={cn('vo-grow-x h-full rounded-full', className)} style={{ width: `${value}%`, ...delay(wait) }} />
     </div>
   )
 }
 
-function Ring({ value, size = 76 }: { value: number; size?: number }) {
+function Ring({ value, size = 76, wait = 500 }: { value: number; size?: number; wait?: number }) {
   const r = (size - 8) / 2
   const c = 2 * Math.PI * r
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90" aria-hidden>
       <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={8} className="stroke-primary-soft" />
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={8} strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - value / 100)} className="stroke-primary" />
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={r}
+        fill="none"
+        strokeWidth={8}
+        strokeLinecap="round"
+        strokeDasharray={c}
+        strokeDashoffset={c * (1 - value / 100)}
+        className="stroke-primary"
+        style={{ '--ring-from': c, animation: `vo-ring 1.4s ${wait}ms cubic-bezier(0.16, 1, 0.3, 1) both` } as CSSProperties}
+      />
     </svg>
+  )
+}
+
+function DrawPath({ d, color, wait }: { d: string; color: string; wait: number }) {
+  return (
+    <path
+      d={d}
+      fill="none"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      pathLength={1}
+      className="vo-draw"
+      style={{ '--len': 1, animationDuration: '1.6s', animationDelay: `${wait}ms` } as CSSProperties}
+    />
   )
 }
 
@@ -78,13 +110,15 @@ export function DashboardMockup({ className }: { className?: string }) {
           </div>
           <div className="grid grid-cols-3 gap-2">
             {[
-              { label: 'Receitas', value: 'R$ 5.200', tone: 'text-success-ink' },
-              { label: 'Despesas', value: 'R$ 3.840', tone: 'text-danger-ink' },
-              { label: 'Saldo', value: 'R$ 1.360', tone: 'text-fg' },
-            ].map((stat) => (
-              <div key={stat.label} className="rounded-lg border border-line bg-surface p-2 sm:p-2.5">
+              { label: 'Receitas', value: 5200, tone: 'text-success-ink' },
+              { label: 'Despesas', value: 3840, tone: 'text-danger-ink' },
+              { label: 'Saldo', value: 1360, tone: 'text-fg' },
+            ].map((stat, index) => (
+              <div key={stat.label} className="animate-fade-up rounded-lg border border-line bg-surface p-2 sm:p-2.5" style={delay(450 + index * 90)}>
                 <p className="text-[9px] text-muted sm:text-[10px]">{stat.label}</p>
-                <p className={cn('mt-0.5 font-display text-[11px] font-bold sm:text-sm', stat.tone)}>{stat.value}</p>
+                <p className={cn('mt-0.5 font-display text-[11px] font-bold sm:text-sm', stat.tone)}>
+                  <CountUp value={stat.value} duration={1600} format={(v) => formatCurrency(v, { cents: false })} className="vo-tabular" />
+                </p>
               </div>
             ))}
           </div>
@@ -95,10 +129,10 @@ export function DashboardMockup({ className }: { className?: string }) {
                 {[22, 44, 66].map((y) => (
                   <line key={y} x1="0" x2="240" y1={y} y2={y} className="stroke-line" strokeWidth="1" />
                 ))}
-                <path d={AREA_INCOME} fill="var(--vo-chart-1)" fillOpacity="0.1" />
-                <path d={LINE_INCOME} fill="none" stroke="var(--vo-chart-1)" strokeWidth="2" />
-                <path d={AREA_EXPENSE} fill="var(--vo-chart-2)" fillOpacity="0.1" />
-                <path d={LINE_EXPENSE} fill="none" stroke="var(--vo-chart-2)" strokeWidth="2" />
+                <path d={AREA_INCOME} fill="var(--vo-chart-1)" fillOpacity="0.1" className="animate-fade-in" style={{ animationDuration: '0.8s', ...delay(1500) }} />
+                <DrawPath d={LINE_INCOME} color="var(--vo-chart-1)" wait={700} />
+                <path d={AREA_EXPENSE} fill="var(--vo-chart-2)" fillOpacity="0.1" className="animate-fade-in" style={{ animationDuration: '0.8s', ...delay(1700) }} />
+                <DrawPath d={LINE_EXPENSE} color="var(--vo-chart-2)" wait={900} />
               </svg>
             </div>
             <div className="col-span-2 flex flex-col items-center justify-center rounded-lg border border-line bg-surface p-2">
@@ -114,7 +148,12 @@ export function DashboardMockup({ className }: { className?: string }) {
               <p className="mb-1.5 text-[10px] font-semibold text-fg">Tarefas de hoje</p>
               {['Pagar conta de luz', 'Enviar relatório', 'Agendar dentista'].map((task, i) => (
                 <div key={task} className="flex items-center gap-1.5 py-0.5">
-                  <span className={cn('flex size-3 items-center justify-center rounded-[3px] border', i === 0 ? 'border-success bg-success text-white' : 'border-line-strong')}>{i === 0 && <Check className="size-2" strokeWidth={4} />}</span>
+                  <span
+                    className={cn('flex size-3 items-center justify-center rounded-[3px] border transition-colors', i === 0 ? 'animate-check border-success bg-success text-white' : 'border-line-strong')}
+                    style={i === 0 ? delay(1400) : undefined}
+                  >
+                    {i === 0 && <Check className="size-2" strokeWidth={4} />}
+                  </span>
                   <span className={cn('truncate text-[9px] sm:text-[10px]', i === 0 ? 'text-muted line-through' : 'text-fg-soft')}>{task}</span>
                 </div>
               ))}
@@ -124,11 +163,11 @@ export function DashboardMockup({ className }: { className?: string }) {
               <p className="flex justify-between text-[9px] text-fg-soft sm:text-[10px]">
                 Reserva de emergência <span className="font-semibold">32%</span>
               </p>
-              <Bar value={32} className="bg-success" track="bg-success-soft" />
+              <Bar value={32} className="bg-success" track="bg-success-soft" wait={1100} />
               <p className="mt-1.5 flex justify-between text-[9px] text-fg-soft sm:text-[10px]">
                 Viagem <span className="font-semibold">72%</span>
               </p>
-              <Bar value={72} className="bg-success" track="bg-success-soft" />
+              <Bar value={72} className="bg-success" track="bg-success-soft" wait={1250} />
             </div>
           </div>
         </div>
@@ -152,14 +191,14 @@ export function FinanceMockup() {
         <span className="rounded-md bg-surface-2 px-2 py-1 text-[11px] font-medium text-muted">Setembro</span>
       </div>
       <div className="mt-4 flex h-3 overflow-hidden rounded-full">
-        {cats.map((c) => (
-          <span key={c.label} style={{ width: `${c.value}%`, background: c.color }} className="border-r-2 border-surface last:border-r-0" />
+        {cats.map((c, i) => (
+          <span key={c.label} style={{ width: `${c.value}%`, background: c.color, ...delay(200 + i * 120) }} className="vo-grow-x border-r-2 border-surface last:border-r-0" />
         ))}
         <span className="flex-1 bg-surface-3" />
       </div>
       <ul className="mt-4 space-y-2.5">
-        {cats.map((c) => (
-          <li key={c.label} className="flex items-center gap-2.5 text-[13px]">
+        {cats.map((c, i) => (
+          <li key={c.label} className="flex animate-fade-up items-center gap-2.5 text-[13px]" style={delay(300 + i * 90)}>
             <span className="size-2.5 rounded-[3px]" style={{ background: c.color }} />
             <span className="flex-1 text-fg-soft">{c.label}</span>
             <span className="text-xs text-muted">{c.value}%</span>
@@ -183,8 +222,8 @@ export function GoalsMockup() {
   ]
   return (
     <div className="space-y-3" aria-hidden>
-      {goals.map((g) => (
-        <div key={g.name} className="rounded-2xl border border-line bg-surface p-4 shadow-card">
+      {goals.map((g, i) => (
+        <div key={g.name} className="animate-fade-up rounded-2xl border border-line bg-surface p-4 shadow-card" style={delay(i * 140)}>
           <div className="flex items-center gap-3">
             <span className="flex size-9 items-center justify-center rounded-xl bg-success-soft text-success-ink">
               <Target className="size-4" />
@@ -198,7 +237,7 @@ export function GoalsMockup() {
             <span className="font-display text-lg font-extrabold text-fg">{g.value}%</span>
           </div>
           <div className="mt-3">
-            <Bar value={g.value} className="bg-success" track="bg-success-soft" />
+            <Bar value={g.value} className="bg-success" track="bg-success-soft" wait={300 + goals.indexOf(g) * 140} />
           </div>
         </div>
       ))}
@@ -226,8 +265,8 @@ export function RoutineMockup() {
               <span className={cn('flex size-5 items-center justify-center rounded-full text-[10px]', i === 0 ? 'bg-primary text-white' : 'text-fg')}>{day.n}</span>
             </p>
             <div className="space-y-1">
-              {day.items.map(([time, title, t]) => (
-                <div key={title} className={cn('rounded-md border p-1', tone[t])}>
+              {day.items.map(([time, title, t], j) => (
+                <div key={title} className={cn('animate-scale-in rounded-md border p-1', tone[t])} style={delay(200 + i * 110 + j * 80)}>
                   <p className="text-[9px] font-semibold opacity-80">{time}</p>
                   <p className="truncate text-[10px] font-semibold text-fg">{title}</p>
                 </div>
@@ -261,8 +300,8 @@ export function DigitalMockup() {
         </div>
       </div>
       <ul className="mt-4 space-y-3">
-        {areas.map((a) => (
-          <li key={a.label} className="flex items-center gap-3">
+        {areas.map((a, i) => (
+          <li key={a.label} className="flex animate-fade-up items-center gap-3" style={delay(200 + i * 90)}>
             <span className={cn('flex size-8 items-center justify-center rounded-lg', a.value === 100 ? 'bg-success text-white' : 'bg-primary-soft text-primary-ink')}>
               {a.value === 100 ? <CircleCheck className="size-4" /> : <a.icon className="size-4" />}
             </span>
@@ -270,7 +309,7 @@ export function DigitalMockup() {
               <p className="mb-1 flex justify-between text-xs font-medium text-fg-soft">
                 {a.label} <span className="text-muted">{a.value}%</span>
               </p>
-              <Bar value={a.value} className={a.value === 100 ? 'bg-success' : 'bg-primary'} track={a.value === 100 ? 'bg-success-soft' : 'bg-primary-soft'} />
+              <Bar value={a.value} className={a.value === 100 ? 'bg-success' : 'bg-primary'} track={a.value === 100 ? 'bg-success-soft' : 'bg-primary-soft'} wait={350 + i * 90} />
             </div>
           </li>
         ))}
