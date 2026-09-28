@@ -130,8 +130,8 @@ export default function TasksPage() {
                   { value: 'completed', label: 'Concluídas', count: counts.completed, icon: <CircleCheck /> },
                 ]}
               />
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                <SearchInput value={query} onChange={setQuery} placeholder="Buscar tarefa…" />
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                <SearchInput value={query} onChange={setQuery} placeholder="Buscar tarefa…" className="col-span-2 sm:col-span-1" />
                 <Select aria-label="Filtrar por categoria" value={category} onChange={(e) => setCategory(e.target.value)} options={[{ value: '', label: 'Todas as categorias' }, ...TASK_CATEGORIES]} />
                 <Select aria-label="Filtrar por prioridade" value={priority} onChange={(e) => setPriority(e.target.value)} options={[{ value: '', label: 'Todas as prioridades' }, ...TASK_PRIORITIES]} />
               </div>

@@ -27,8 +27,19 @@ export function clearSession(): void {
   removeKey(storageKeys.session)
 }
 
+type UnauthenticatedHandler = () => void
+let onUnauthenticated: UnauthenticatedHandler | null = null
+
+/** Registrado pela camada de estado para encerrar a sessão local quando ela expira. */
+export function setUnauthenticatedHandler(handler: UnauthenticatedHandler | null): void {
+  onUnauthenticated = handler
+}
+
 export function requireUserId(): string {
   const session = readSession()
-  if (!session) throw new ServiceError('unauthenticated', 'Sua sessão expirou. Entre novamente.')
+  if (!session) {
+    if (onUnauthenticated) queueMicrotask(onUnauthenticated)
+    throw new ServiceError('unauthenticated', 'Sua sessão expirou. Entre novamente.')
+  }
   return session.userId
 }

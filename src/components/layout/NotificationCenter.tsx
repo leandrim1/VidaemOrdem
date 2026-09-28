@@ -31,6 +31,7 @@ export function NotificationCenter() {
 
   useEffect(() => {
     if (!open) return
+    panelRef.current?.focus()
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Node
       if (!panelRef.current?.contains(target) && !buttonRef.current?.contains(target)) setOpen(false)
@@ -76,8 +77,9 @@ export function NotificationCenter() {
           ref={panelRef}
           id={panelId}
           role="dialog"
+          tabIndex={-1}
           aria-label="Central de notificações"
-          className="fixed inset-x-3 top-[4.25rem] z-50 flex max-h-[min(560px,calc(100dvh-6rem))] animate-scale-in flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-overlay sm:absolute sm:inset-x-auto sm:top-12 sm:right-0 sm:w-[400px]"
+          className="fixed inset-x-3 top-[4.25rem] z-50 flex max-h-[min(560px,calc(100dvh-6rem))] animate-scale-in flex-col overflow-hidden outline-none rounded-2xl border border-line bg-surface shadow-overlay sm:absolute sm:inset-x-auto sm:top-12 sm:right-0 sm:w-[400px]"
         >
           <div className="flex items-center justify-between gap-2 border-b border-line px-4 py-3">
             <div>

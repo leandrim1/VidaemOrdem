@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import type { Credentials, OnboardingAnswers, RegisterInput, User } from '@/types'
 import { authService } from '@/services/authService'
+import { setUnauthenticatedHandler } from '@/services/session'
+import { storageKeys } from '@/lib/storage'
 import { resetUserStores } from './registry'
 
 export type AuthStatus = 'idle' | 'checking' | 'authenticated' | 'unauthenticated'
@@ -78,3 +80,22 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     set({ user: null, status: 'unauthenticated' })
   },
 }))
+
+// Sessão expirada durante o uso → volta para o login (as rotas protegidas redirecionam).
+setUnauthenticatedHandler(() => {
+  if (useAuthStore.getState().user) useAuthStore.getState().signOutLocally()
+})
+
+// Logout ou login em outra aba do mesmo navegador mantém esta aba sincronizada.
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (event) => {
+    if (event.key !== storageKeys.session) return
+    const { user } = useAuthStore.getState()
+    if (!event.newValue && user) useAuthStore.getState().signOutLocally()
+    else if (event.newValue) {
+      resetUserStores()
+      useAuthStore.setState({ status: 'idle' })
+      void useAuthStore.getState().init()
+    }
+  })
+}
