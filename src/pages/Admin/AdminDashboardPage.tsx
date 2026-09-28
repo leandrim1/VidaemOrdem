@@ -27,7 +27,7 @@ const METRIC_STYLE: Array<{ icon: LucideIcon; tone: StatTone }> = [
 
 const STATUS_TONE: Record<AdminUserStatus, BadgeTone> = { ativo: 'success', trial: 'primary', inativo: 'neutral', cancelado: 'danger' }
 const STATUS_LABEL: Record<AdminUserStatus, string> = { ativo: 'Ativo', trial: 'Teste', inativo: 'Inativo', cancelado: 'Cancelado' }
-const PLAN_LABEL = { mensal: 'Mensal', anual: 'Anual', trial: 'Teste grátis' } as const
+const PLAN_LABEL = { semanal: 'Semanal', mensal: 'Mensal', anual: 'Anual', trial: 'Teste grátis' } as const
 
 function formatMetric(metric: AdminMetric) {
   if (metric.format === 'currency') return formatCurrency(metric.value, { cents: false })

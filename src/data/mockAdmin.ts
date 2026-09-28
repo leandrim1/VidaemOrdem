@@ -30,8 +30,9 @@ export function createSignupSeries(): Array<{ label: string; cadastros: number }
 
 export const PLAN_DISTRIBUTION = [
   { plan: 'Anual', value: 6128, color: 'var(--vo-chart-1)' },
-  { plan: 'Mensal', value: 4211, color: 'var(--vo-chart-2)' },
-  { plan: 'Teste grátis', value: 2508, color: 'var(--vo-chart-3)' },
+  { plan: 'Mensal', value: 3624, color: 'var(--vo-chart-2)' },
+  { plan: 'Semanal', value: 587, color: 'var(--vo-chart-3)' },
+  { plan: 'Teste grátis', value: 2508, color: 'var(--vo-chart-4)' },
 ]
 
 export const CHALLENGE_FUNNEL = [
@@ -53,13 +54,13 @@ function slug(text: string): string {
 
 export function createAdminUsers(count = 48): AdminUser[] {
   const random = createRandom(4242)
-  const plans: PlanType[] = ['anual', 'mensal', 'trial']
   const statuses: AdminUserStatus[] = ['ativo', 'ativo', 'ativo', 'trial', 'inativo', 'cancelado']
   return Array.from({ length: count }, (_, index) => {
     const first = FIRST_NAMES[Math.floor(random() * FIRST_NAMES.length)]
     const last = LAST_NAMES[Math.floor(random() * LAST_NAMES.length)]
     const status = statuses[Math.floor(random() * statuses.length)]
-    const plan = status === 'trial' ? 'trial' : plans[Math.floor(random() * 2)]
+    const roll = random()
+    const plan: PlanType = status === 'trial' ? 'trial' : roll < 0.5 ? 'anual' : roll < 0.88 ? 'mensal' : 'semanal'
     const daysAgo = Math.floor(random() * 300) + 1
     const joined = subDays(new Date(), daysAgo)
     const inactiveFor = Math.min(daysAgo, Math.floor(random() * (status === 'ativo' || status === 'trial' ? 6 : 60)))

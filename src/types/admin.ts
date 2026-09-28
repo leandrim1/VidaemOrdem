@@ -1,6 +1,6 @@
 import type { ISODate } from './common'
 
-export type PlanType = 'mensal' | 'anual' | 'trial'
+export type PlanType = 'semanal' | 'mensal' | 'anual' | 'trial'
 export type AdminUserStatus = 'ativo' | 'inativo' | 'trial' | 'cancelado'
 
 export interface AdminUser {
