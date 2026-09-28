@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Wallet } from 'lucide-react'
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Plus, Wallet } from 'lucide-react'
 import type { CategoryTotal, MonthSummary } from '@/utils/finance'
 import { PATHS } from '@/routes/paths'
 import { capitalize, locale } from '@/utils/date'
@@ -51,6 +51,16 @@ export function BalanceCard({ summary, categories }: { summary: MonthSummary; ca
           <Money value={summary.expense} className="mt-1.5 block text-lg font-bold text-fg" />
         </div>
       </div>
+
+      {categories.length === 0 && (
+        <Link
+          to={`${PATHS.finance}?novo=1`}
+          className="mt-5 flex items-center gap-3 rounded-xl border border-dashed border-line-strong p-4 text-sm text-muted transition-colors hover:border-primary hover:text-primary-ink"
+        >
+          <Plus className="size-4 shrink-0" aria-hidden />
+          Registre sua primeira receita ou despesa para ver o resumo do mês.
+        </Link>
+      )}
 
       {categories.length > 0 && (
         <div className="mt-5">

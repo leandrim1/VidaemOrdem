@@ -42,7 +42,7 @@ function SubscriptionForm({ subscription, onClose, onSubmit }: Omit<Subscription
     <form onSubmit={submit} noValidate>
       <ModalBody className="space-y-4">
         <FormField label="Nome" error={errors.name?.message} required>
-          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Netflix" autoFocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
+          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Netflix" data-autofocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
         </FormField>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Valor" error={errors.amount?.message} required>

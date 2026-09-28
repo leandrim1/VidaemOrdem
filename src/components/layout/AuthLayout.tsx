@@ -29,7 +29,7 @@ export function AuthLayout({ title, description, children, footer, documentTitle
           <div className="mt-8">{children}</div>
           {footer && <div className="mt-8 text-center text-sm text-muted">{footer}</div>}
         </main>
-        <p className="text-xs text-subtle">© {new Date().getFullYear()} Vida em Ordem. Seus dados ficam protegidos.</p>
+        <p className="text-xs text-muted">© {new Date().getFullYear()} Vida em Ordem. Seus dados ficam protegidos.</p>
       </div>
 
       <aside className="relative hidden overflow-hidden bg-navy p-12 text-white lg:flex lg:flex-col lg:justify-between dark:bg-[#080d19]">

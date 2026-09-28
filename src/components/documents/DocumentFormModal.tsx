@@ -42,7 +42,7 @@ function DocumentForm({ document, onClose, onSubmit }: Omit<DocumentFormModalPro
           <p>Por segurança, guardamos apenas as informações do documento — nunca o arquivo ou números sensíveis.</p>
         </div>
         <FormField label="Nome do documento" error={errors.name?.message} required>
-          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: CNH, contrato de aluguel…" autoFocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
+          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: CNH, contrato de aluguel…" data-autofocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
         </FormField>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Categoria" error={errors.category?.message}>

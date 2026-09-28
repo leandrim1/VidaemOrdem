@@ -45,6 +45,8 @@ export function Modal({ open, onClose, title, description, children, size = 'md'
     if (open && !dialog.open) {
       const previouslyFocused = document.activeElement as HTMLElement | null
       dialog.showModal()
+      // O <dialog> foca o primeiro elemento focável; preferimos o campo marcado.
+      requestAnimationFrame(() => dialog.querySelector<HTMLElement>('[data-autofocus]')?.focus())
       lockScroll()
       // Mantém os toasts visíveis acima do novo diálogo (camada superior).
       window.dispatchEvent(new Event('vo:dialog-open'))

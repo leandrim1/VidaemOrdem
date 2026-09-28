@@ -74,7 +74,7 @@ export const HabitCard = memo(function HabitCard({ habit, onToggle, onEdit, onDe
             const parsed = parseISO(date)
             return (
               <li key={date} className="flex flex-col items-center gap-1">
-                <span className="text-[10px] font-semibold text-subtle">{format(parsed, 'EEE', { locale }).replace('.', '')}</span>
+                <span className="text-[10px] font-semibold text-muted">{format(parsed, 'EEE', { locale }).replace('.', '')}</span>
                 <button
                   type="button"
                   onClick={() => onToggle(habit, date)}

@@ -56,7 +56,7 @@ function EventForm({ event, defaultDate, onClose, onSubmit, onDelete }: Omit<Rou
           )}
         />
         <FormField label="Título" error={errors.title?.message} required>
-          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Reunião, academia, aniversário…" autoFocus invalid={invalid} aria-describedby={describedBy} {...register('title')} />}
+          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Reunião, academia, aniversário…" data-autofocus invalid={invalid} aria-describedby={describedBy} {...register('title')} />}
         </FormField>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <FormField label="Data" error={errors.date?.message} required className="sm:col-span-1">

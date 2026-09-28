@@ -81,7 +81,7 @@ export function Sidebar({ collapsed, onNavigate, className }: SidebarProps) {
               {collapsed ? (
                 <div className="mx-auto mb-2 h-px w-6 bg-line" aria-hidden />
               ) : (
-                <p className="mb-1 px-3 text-[11px] font-semibold tracking-wider text-subtle uppercase">{group.label}</p>
+                <p className="mb-1 px-3 text-[11px] font-semibold tracking-wider text-muted uppercase">{group.label}</p>
               )}
               <ul className={cn('space-y-0.5', collapsed && 'flex flex-col items-center')}>
                 {group.items.map((item) => (

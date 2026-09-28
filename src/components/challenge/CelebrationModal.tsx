@@ -83,7 +83,7 @@ export function CelebrationModal({ open, onClose, variant, day, nextTitle }: Cel
         <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-warning-soft px-3 py-1 text-sm font-bold text-warning-ink">
           <Check className="size-4" aria-hidden /> +{isFinal ? 120 : 20} pontos
         </p>
-        <Button className="mt-6" fullWidth size="lg" onClick={onClose} autoFocus>
+        <Button className="mt-6" fullWidth size="lg" onClick={onClose} data-autofocus>
           {isFinal ? 'Ver minha conquista' : 'Continuar'}
         </Button>
       </div>

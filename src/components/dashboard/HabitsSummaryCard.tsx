@@ -3,6 +3,7 @@ import { ArrowRight, Check, Flame } from 'lucide-react'
 import type { HabitWithStats } from '@/hooks/useHabits'
 import { cn } from '@/lib/cn'
 import { PATHS } from '@/routes/paths'
+import { buttonClasses } from '@/components/ui/Button'
 import { Card, CardHeader } from '@/components/ui/Card'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { EmptyState } from '@/components/ui/States'
@@ -28,7 +29,17 @@ export function HabitsSummaryCard({ habits, weeklyProgress, onToggle }: HabitsSu
         }
       />
       {habits.length === 0 ? (
-        <EmptyState compact icon={<Flame />} title="Nenhum hábito" description="Crie hábitos simples e acompanhe sua sequência." />
+        <EmptyState
+          compact
+          icon={<Flame />}
+          title="Nenhum hábito"
+          description="Crie hábitos simples e acompanhe sua sequência."
+          action={
+            <Link to={`${PATHS.habits}?novo=1`} className={buttonClasses('soft', 'sm')}>
+              Criar hábito
+            </Link>
+          }
+        />
       ) : (
         <>
           <div className="flex items-end justify-between gap-3">

@@ -37,7 +37,7 @@ function HabitForm({ habit, onClose, onSubmit }: Omit<HabitFormModalProps, 'open
     <form onSubmit={submit} noValidate>
       <ModalBody className="space-y-5">
         <FormField label="Nome do hábito" error={errors.name?.message} required>
-          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Ler 20 minutos" autoFocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
+          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Ler 20 minutos" data-autofocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
         </FormField>
         <fieldset>
           <legend className="mb-2 text-sm font-medium text-fg-soft">Ícone</legend>

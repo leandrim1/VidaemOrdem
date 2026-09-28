@@ -26,7 +26,7 @@ export function Hero() {
             <span className="flex items-center gap-1 rounded-full bg-primary-soft px-2 py-0.5 text-xs font-semibold text-primary-ink">
               <Sparkles className="size-3" aria-hidden /> Novo
             </span>
-            Desafio de 7 dias para organizar tudo
+            Desafio de 7 dias<span className="hidden sm:inline"> para organizar tudo</span>
             <ArrowRight className="size-3.5 text-muted" aria-hidden />
           </a>
           <h1 id="hero-title" className="mt-7 animate-fade-up text-[40px] leading-[1.05] font-extrabold tracking-tight text-fg [animation-delay:60ms] sm:text-6xl lg:text-[68px]">

@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ChartLine as LineChart } from 'lucide-react'
 import { useCurrentUser } from '@/hooks/useAuth'
 import { useDashboard } from '@/hooks/useDashboard'
 import { PATHS } from '@/routes/paths'
@@ -8,7 +8,8 @@ import { capitalize, greeting, locale } from '@/utils/date'
 import { firstName } from '@/utils/format'
 import { ChartCard } from '@/components/ui/ChartCard'
 import { PageHeader } from '@/components/ui/PageHeader'
-import { ErrorState, LoadingState } from '@/components/ui/States'
+import { buttonClasses } from '@/components/ui/Button'
+import { EmptyState, ErrorState, LoadingState } from '@/components/ui/States'
 import { IncomeExpenseAreaChart } from '@/components/charts/IncomeExpenseAreaChart'
 import { LEGEND_INCOME_EXPENSE } from '@/components/charts/chartTheme'
 import { BalanceCard } from '@/components/dashboard/BalanceCard'
@@ -65,7 +66,7 @@ export default function DashboardPage() {
         <div className="xl:col-span-5">
           <BalanceCard summary={finance.summary} categories={finance.categories} />
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-5 xl:col-span-7">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-5 xl:col-span-7">
           <OrganizationScoreCard organization={organization} />
           <TodayFocusCard actions={focus} />
         </div>
@@ -88,7 +89,20 @@ export default function DashboardPage() {
           legend={LEGEND_INCOME_EXPENSE}
           summary={finance.series.map((p) => `${p.label}: receitas ${p.income}, despesas ${p.expense}`).join('; ')}
         >
-          <IncomeExpenseAreaChart data={finance.series} />
+          {finance.transactions.length === 0 ? (
+            <EmptyState
+              icon={<LineChart />}
+              title="Seu gráfico aparece aqui"
+              description="Conforme você registra receitas e despesas, acompanhamos sua evolução mês a mês."
+              action={
+                <Link to={`${PATHS.finance}?novo=1`} className={buttonClasses('soft', 'sm')}>
+                  Adicionar movimentação
+                </Link>
+              }
+            />
+          ) : (
+            <IncomeExpenseAreaChart data={finance.series} />
+          )}
         </ChartCard>
         <div className="xl:col-span-4">
           <UpcomingBillsCard bills={accounts.upcoming} overdueCount={accounts.totals.overdueCount} onPay={(bill) => void accounts.togglePaid(bill)} />

@@ -61,7 +61,7 @@ function ContributionForm({ goal, onClose, onSubmit }: { goal: Goal; onClose: ()
         />
         <FormField label="Valor" error={errors.amount?.message} required>
           {({ id, describedBy, invalid }) => (
-            <Controller control={control} name="amount" render={({ field }) => <CurrencyInput id={id} value={field.value} onChange={field.onChange} invalid={invalid} aria-describedby={describedBy} autoFocus />} />
+            <Controller control={control} name="amount" render={({ field }) => <CurrencyInput id={id} value={field.value} onChange={field.onChange} invalid={invalid} aria-describedby={describedBy} data-autofocus />} />
           )}
         </FormField>
       </ModalBody>

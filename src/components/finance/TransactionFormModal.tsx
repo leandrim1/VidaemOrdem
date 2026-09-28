@@ -64,7 +64,7 @@ function TransactionForm({ transaction, onClose, onSubmit }: Omit<TransactionFor
         />
         <FormField label="Descrição" error={errors.description?.message} required>
           {({ id, describedBy, invalid }) => (
-            <Input id={id} placeholder={type === 'income' ? 'Ex.: Salário' : 'Ex.: Supermercado'} invalid={invalid} aria-describedby={describedBy} autoFocus {...register('description')} />
+            <Input id={id} placeholder={type === 'income' ? 'Ex.: Salário' : 'Ex.: Supermercado'} invalid={invalid} aria-describedby={describedBy} data-autofocus {...register('description')} />
           )}
         </FormField>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

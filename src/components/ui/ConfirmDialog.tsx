@@ -48,7 +48,7 @@ export function ConfirmDialog({
         </div>
       </ModalBody>
       <ModalFooter className="border-t-0 pt-0">
-        <Button variant="outline" onClick={onCancel} disabled={busy} autoFocus>
+        <Button variant="outline" onClick={onCancel} disabled={busy} data-autofocus>
           {cancelLabel}
         </Button>
         <Button

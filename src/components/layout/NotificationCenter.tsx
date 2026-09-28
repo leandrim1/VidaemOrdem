@@ -152,7 +152,7 @@ export function NotificationCenter() {
                             {!notification.read && <span className="size-2 shrink-0 rounded-full bg-primary" aria-label="Não lida" />}
                           </span>
                           <span className="mt-0.5 block text-[13px] leading-snug text-muted">{notification.message}</span>
-                          <span className="mt-1 block text-[11px] text-subtle">{formatRelativeTime(notification.createdAt)}</span>
+                          <span className="mt-1 block text-[11px] text-muted">{formatRelativeTime(notification.createdAt)}</span>
                         </span>
                       </button>
                       <div className="absolute top-2 right-2 flex gap-0.5 opacity-100 transition-opacity sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100">

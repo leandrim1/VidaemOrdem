@@ -44,7 +44,7 @@ function AccountForm({ account, onClose, onSubmit }: Omit<AccountFormModalProps,
     <form onSubmit={submit} noValidate>
       <ModalBody className="space-y-4">
         <FormField label="Nome da conta" error={errors.name?.message} required>
-          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Conta de luz" autoFocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
+          {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Conta de luz" data-autofocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
         </FormField>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Categoria" error={errors.category?.message} required>

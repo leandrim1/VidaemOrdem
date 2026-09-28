@@ -88,7 +88,7 @@ function CardForm({ card, onClose, onSubmit }: Omit<CardFormModalProps, 'open'>)
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <FormField label="Nome do cartão" error={errors.name?.message} required>
-              {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Platinum" autoFocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
+              {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Platinum" data-autofocus invalid={invalid} aria-describedby={describedBy} {...register('name')} />}
             </FormField>
             <FormField label="Banco" error={errors.bank?.message} required>
               {({ id, describedBy, invalid }) => <Input id={id} placeholder="Ex.: Nubank" invalid={invalid} aria-describedby={describedBy} {...register('bank')} />}

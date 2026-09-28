@@ -48,7 +48,7 @@ function TaskForm({ task, onClose, onSubmit }: Omit<TaskFormModalProps, 'open'>)
     <form onSubmit={submit} noValidate>
       <ModalBody className="space-y-4">
         <FormField label="Título" error={errors.title?.message} required>
-          {({ id, describedBy, invalid }) => <Input id={id} placeholder="O que precisa ser feito?" autoFocus invalid={invalid} aria-describedby={describedBy} {...register('title')} />}
+          {({ id, describedBy, invalid }) => <Input id={id} placeholder="O que precisa ser feito?" data-autofocus invalid={invalid} aria-describedby={describedBy} {...register('title')} />}
         </FormField>
         <FormField label="Descrição" error={errors.description?.message}>
           {({ id, describedBy, invalid }) => <Textarea id={id} rows={2} placeholder="Detalhes (opcional)" invalid={invalid} aria-describedby={describedBy} {...register('description')} />}

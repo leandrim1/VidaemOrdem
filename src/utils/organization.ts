@@ -6,6 +6,8 @@ export interface OrganizationArea {
   key: 'financas' | 'tarefas' | 'habitos' | 'digital' | 'checklists'
   label: string
   score: number
+  /** `false` quando o usuário ainda não tem dados nesta área (conta como 0). */
+  hasData: boolean
 }
 
 export interface OrganizationScore {
@@ -39,11 +41,11 @@ export function computeOrganizationScore(input: OrganizationInput): Organization
   const checklistDone = checklistItems.filter((i) => i.done).length
 
   const areas: OrganizationArea[] = [
-    { key: 'financas', label: 'Contas em dia', score: ratio(accountsOnTime, input.accounts.length) },
-    { key: 'tarefas', label: 'Tarefas concluídas', score: ratio(tasksDone, input.tasks.length) },
-    { key: 'habitos', label: 'Hábitos da semana', score: overallWeeklyProgress(input.habits, input.habitLogs) },
-    { key: 'digital', label: 'Organização digital', score: ratio(digitalDone, input.digitalItems.length) },
-    { key: 'checklists', label: 'Checklists', score: ratio(checklistDone, checklistItems.length) },
+    { key: 'financas', label: 'Contas em dia', score: ratio(accountsOnTime, input.accounts.length), hasData: input.accounts.length > 0 },
+    { key: 'tarefas', label: 'Tarefas concluídas', score: ratio(tasksDone, input.tasks.length), hasData: input.tasks.length > 0 },
+    { key: 'habitos', label: 'Hábitos da semana', score: overallWeeklyProgress(input.habits, input.habitLogs), hasData: input.habits.some((h) => !h.archived) },
+    { key: 'digital', label: 'Organização digital', score: ratio(digitalDone, input.digitalItems.length), hasData: input.digitalItems.length > 0 },
+    { key: 'checklists', label: 'Checklists', score: ratio(checklistDone, checklistItems.length), hasData: checklistItems.length > 0 },
   ]
   const score = Math.round(areas.reduce((sum, area) => sum + area.score, 0) / areas.length)
   return { score, areas }

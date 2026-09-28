@@ -38,7 +38,7 @@ export function TodayFocusCard({ actions }: { actions: FocusAction[] }) {
                     </span>
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-semibold text-fg">{action.title}</span>
+                    <span className="line-clamp-2 block text-sm leading-snug font-semibold text-fg">{action.title}</span>
                     <span className="block truncate text-[13px] text-muted">{action.description}</span>
                   </span>
                   <ChevronRight className="size-4 shrink-0 text-subtle transition-transform group-hover:translate-x-0.5 group-hover:text-fg" aria-hidden />
