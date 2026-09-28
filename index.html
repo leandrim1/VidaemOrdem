@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>Vida em Ordem — Organize sua vida em um só lugar</title>
+    <meta name="description" content="Organize suas finanças, tarefas, metas e rotina com o Vida em Ordem." />
+    <meta name="keywords" content="organização pessoal, finanças pessoais, controle de gastos, tarefas, metas, hábitos, rotina, planner" />
+    <meta name="author" content="Vida em Ordem" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B1120" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href="https://vidaemordem.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Vida em Ordem" />
+    <meta property="og:title" content="Vida em Ordem — Organize sua vida em um só lugar" />
+    <meta property="og:description" content="Organize suas finanças, tarefas, metas e rotina com o Vida em Ordem." />
+    <meta property="og:url" content="https://vidaemordem.app/" />
+    <meta property="og:image" content="https://vidaemordem.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Painel do Vida em Ordem com finanças, metas e tarefas" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vida em Ordem — Organize sua vida em um só lugar" />
+    <meta name="twitter:description" content="Organize suas finanças, tarefas, metas e rotina com o Vida em Ordem." />
+    <meta name="twitter:image" content="https://vidaemordem.app/og-image.png" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Vida em Ordem",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "description": "Organize suas finanças, tarefas, metas e rotina com o Vida em Ordem.",
+        "offers": { "@type": "Offer", "price": "19.90", "priceCurrency": "BRL" }
+      }
+    </script>
+
+    <!-- Aplica o tema antes da primeira pintura para evitar flash de cor -->
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('vo:theme');
+          var pref = raw ? JSON.parse(raw).state.theme : 'system';
+          var dark = pref === 'dark' || (pref !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>O Vida em Ordem precisa de JavaScript habilitado para funcionar.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

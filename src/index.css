@@ -1,0 +1,280 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens
+ * Os tokens semânticos abaixo mudam entre tema claro e escuro. O tema escuro
+ * foi desenhado a partir do Navy da marca (não é uma inversão de cores):
+ * superfícies em camadas azuladas, bordas de baixo contraste e cores de
+ * estado clareadas para manter legibilidade.
+ */
+:root {
+  color-scheme: light;
+
+  --vo-canvas: #f8fafc;
+  --vo-surface: #ffffff;
+  --vo-surface-2: #f1f5f9;
+  --vo-surface-3: #e9eef5;
+  --vo-line: #e2e8f0;
+  --vo-line-strong: #cbd5e1;
+  --vo-fg: #0f172a;
+  --vo-fg-soft: #334155;
+  --vo-muted: #64748b;
+  --vo-subtle: #94a3b8;
+
+  --vo-primary: #2563eb;
+  --vo-primary-dark: #1d4ed8;
+  --vo-primary-ink: #2563eb;
+  --vo-primary-soft: #eff6ff;
+  --vo-primary-ring: rgb(37 99 235 / 0.35);
+
+  --vo-success: #16a34a;
+  --vo-success-ink: #15803d;
+  --vo-success-soft: #ecfdf3;
+  --vo-warning: #f59e0b;
+  --vo-warning-ink: #b45309;
+  --vo-warning-soft: #fffbeb;
+  --vo-danger: #dc2626;
+  --vo-danger-ink: #dc2626;
+  --vo-danger-soft: #fef2f2;
+
+  --vo-shadow-color: 15 23 42;
+  --vo-overlay: rgb(15 23 42 / 0.45);
+
+  /* Paleta categórica dos gráficos (validada para daltonismo) */
+  --vo-chart-1: #2563eb;
+  --vo-chart-2: #eb6834;
+  --vo-chart-3: #1baf7a;
+  --vo-chart-4: #eda100;
+  --vo-chart-5: #e87ba4;
+  --vo-chart-6: #008300;
+  --vo-chart-7: #4a3aa7;
+  --vo-chart-8: #e34948;
+  --vo-chart-neutral: #94a3b8;
+  --vo-chart-grid: #e2e8f0;
+  --vo-chart-axis: #94a3b8;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --vo-canvas: #0b1120;
+  --vo-surface: #121a2b;
+  --vo-surface-2: #182235;
+  --vo-surface-3: #1f2a40;
+  --vo-line: #223049;
+  --vo-line-strong: #2e3d5a;
+  --vo-fg: #e6ebf2;
+  --vo-fg-soft: #c3ccd9;
+  --vo-muted: #8c9ab0;
+  --vo-subtle: #64748b;
+
+  --vo-primary: #2563eb;
+  --vo-primary-dark: #1d4ed8;
+  --vo-primary-ink: #6ea4fa;
+  --vo-primary-soft: rgb(59 130 246 / 0.14);
+  --vo-primary-ring: rgb(96 165 250 / 0.45);
+
+  --vo-success: #22c55e;
+  --vo-success-ink: #4ade80;
+  --vo-success-soft: rgb(34 197 94 / 0.12);
+  --vo-warning: #fbbf24;
+  --vo-warning-ink: #fbbf24;
+  --vo-warning-soft: rgb(251 191 36 / 0.12);
+  --vo-danger: #f87171;
+  --vo-danger-ink: #f87171;
+  --vo-danger-soft: rgb(248 113 113 / 0.12);
+
+  --vo-shadow-color: 0 0 0;
+  --vo-overlay: rgb(2 6 16 / 0.7);
+
+  --vo-chart-1: #3b82f6;
+  --vo-chart-2: #d95926;
+  --vo-chart-3: #199e70;
+  --vo-chart-4: #c98500;
+  --vo-chart-5: #d55181;
+  --vo-chart-6: #008300;
+  --vo-chart-7: #9085e9;
+  --vo-chart-8: #e66767;
+  --vo-chart-neutral: #64748b;
+  --vo-chart-grid: #223049;
+  --vo-chart-axis: #64748b;
+}
+
+@theme inline {
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Manrope Variable', 'Manrope', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: var(--vo-canvas);
+  --color-surface: var(--vo-surface);
+  --color-surface-2: var(--vo-surface-2);
+  --color-surface-3: var(--vo-surface-3);
+  --color-line: var(--vo-line);
+  --color-line-strong: var(--vo-line-strong);
+  --color-fg: var(--vo-fg);
+  --color-fg-soft: var(--vo-fg-soft);
+  --color-muted: var(--vo-muted);
+  --color-subtle: var(--vo-subtle);
+
+  --color-primary: var(--vo-primary);
+  --color-primary-dark: var(--vo-primary-dark);
+  --color-primary-ink: var(--vo-primary-ink);
+  --color-primary-soft: var(--vo-primary-soft);
+  --color-primary-ring: var(--vo-primary-ring);
+
+  --color-success: var(--vo-success);
+  --color-success-ink: var(--vo-success-ink);
+  --color-success-soft: var(--vo-success-soft);
+  --color-warning: var(--vo-warning);
+  --color-warning-ink: var(--vo-warning-ink);
+  --color-warning-soft: var(--vo-warning-soft);
+  --color-danger: var(--vo-danger);
+  --color-danger-ink: var(--vo-danger-ink);
+  --color-danger-soft: var(--vo-danger-soft);
+
+  --color-navy: #0f172a;
+  --color-overlay: var(--vo-overlay);
+
+  --radius-card: 16px;
+  --radius-field: 10px;
+
+  --shadow-xs: 0 1px 2px rgb(var(--vo-shadow-color) / 0.04);
+  --shadow-card: 0 1px 2px rgb(var(--vo-shadow-color) / 0.04), 0 1px 3px rgb(var(--vo-shadow-color) / 0.04);
+  --shadow-raised: 0 4px 12px -2px rgb(var(--vo-shadow-color) / 0.08), 0 2px 4px -2px rgb(var(--vo-shadow-color) / 0.05);
+  --shadow-overlay: 0 24px 48px -12px rgb(var(--vo-shadow-color) / 0.25), 0 8px 16px -8px rgb(var(--vo-shadow-color) / 0.12);
+
+  --animate-fade-in: vo-fade-in 0.2s ease-out both;
+  --animate-fade-up: vo-fade-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scale-in: vo-scale-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-in-left: vo-slide-in-left 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-sheet-up: vo-sheet-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pop: vo-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes vo-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes vo-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes vo-scale-in {
+  from { opacity: 0; transform: translateY(4px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes vo-slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+@keyframes vo-sheet-up {
+  from { opacity: 0.6; transform: translateY(100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes vo-pop {
+  0% { opacity: 0; transform: scale(0.4); }
+  60% { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes vo-confetti {
+  0% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0deg); }
+  100% { opacity: 0; transform: translate3d(var(--dx), var(--dy), 0) rotate(var(--rot)); }
+}
+@keyframes vo-draw {
+  from { stroke-dashoffset: var(--len); }
+  to { stroke-dashoffset: 0; }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-fg;
+    font-feature-settings: 'cv11', 'ss01';
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--vo-primary-soft);
+    color: var(--vo-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--vo-primary);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
+  /* Datas e horários nativos seguem o tema */
+  input[type='date']::-webkit-calendar-picker-indicator,
+  input[type='time']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+  .dark input[type='date']::-webkit-calendar-picker-indicator,
+  .dark input[type='time']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+
+  dialog::backdrop {
+    background: var(--vo-overlay);
+    backdrop-filter: blur(2px);
+  }
+}
+
+@layer components {
+  .vo-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--vo-line-strong) transparent;
+  }
+
+  .vo-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .vo-confetti-piece {
+    animation: vo-confetti 1.4s cubic-bezier(0.15, 0.6, 0.35, 1) forwards;
+  }
+
+  .vo-draw {
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: vo-draw 0.5s 0.2s ease-out forwards;
+  }
+
+  /* Recharts: remove o contorno padrão ao focar o SVG com o mouse */
+  .recharts-wrapper *:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

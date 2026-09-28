@@ -1,0 +1,14 @@
+{
+  "name": "Vida em Ordem",
+  "short_name": "Vida em Ordem",
+  "description": "Organize suas finanças, tarefas, metas e rotina com o Vida em Ordem.",
+  "lang": "pt-BR",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#2563EB",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
