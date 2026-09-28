@@ -1,6 +1,7 @@
 import {
   CalendarDays,
   CircleHelp,
+  Gem,
   ClipboardCheck,
   CreditCard,
   FileText,
@@ -66,6 +67,7 @@ export const NAV_GROUPS: NavGroup[] = [
 ]
 
 export const FOOTER_NAV: NavItem[] = [
+  { label: 'Meu plano', href: PATHS.plan, icon: Gem },
   { label: 'Ajuda', href: PATHS.help, icon: CircleHelp },
   { label: 'Configurações', href: PATHS.settings, icon: Settings },
   { label: 'Perfil', href: PATHS.profile, icon: User },

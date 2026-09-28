@@ -180,7 +180,7 @@ export default function OnboardingPage() {
             </span>
             <h1 className="mt-8 max-w-xl animate-fade-up text-3xl font-extrabold text-fg sm:text-4xl">Perfeito, {name}. Vamos colocar sua vida em ordem.</h1>
             <p className="mt-4 max-w-md animate-fade-up text-muted [animation-delay:120ms]">
-              Seu painel está pronto. Sugerimos começar pelo Desafio de 7 dias — um passo a passo simples para organizar cada área da sua vida.
+              Seu painel está pronto e você tem 7 dias grátis para explorar tudo, sem cobrança automática. Sugerimos começar pelo Desafio de 7 dias — um passo a passo simples para organizar cada área da sua vida.
             </p>
             <div className="mt-10 flex w-full max-w-sm animate-fade-up flex-col gap-3 [animation-delay:200ms]">
               <Button size="lg" fullWidth rightIcon={<ArrowRight className="size-4" />} onClick={() => navigate(PATHS.app, { replace: true })}>

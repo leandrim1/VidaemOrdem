@@ -15,6 +15,7 @@ interface NotificationState {
   remove: (id: string) => Promise<void>
   clear: () => Promise<void>
   push: (input: Omit<Notification, 'id' | 'createdAt' | 'read'>) => Promise<void>
+  pushOnce: (key: string, input: Omit<Notification, 'id' | 'createdAt' | 'read'>) => Promise<void>
   reset: () => void
 }
 
@@ -59,6 +60,10 @@ export const useNotificationStore = create<NotificationState>()((set, get) => ({
 
   async push(input) {
     set({ items: await notificationsService.push(input) })
+  },
+
+  async pushOnce(key, input) {
+    set({ items: await notificationsService.pushOnce(key, input) })
   },
 
   reset() {

@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Bell, BellOff, Check, CheckCheck, Flame, Receipt, Sparkles, Target, Trash2, Info, ListChecks, type LucideIcon } from 'lucide-react'
+import { Bell, BellOff, Check, CheckCheck, CreditCard, Flame, Receipt, Sparkles, Target, Trash2, Info, ListChecks, type LucideIcon } from 'lucide-react'
 import type { NotificationKind } from '@/types'
 import { cn } from '@/lib/cn'
 import { useNotifications } from '@/hooks/useNotifications'
@@ -15,6 +15,7 @@ const kindIcon: Record<NotificationKind, { icon: LucideIcon; className: string }
   goal: { icon: Target, className: 'bg-success-soft text-success-ink' },
   habit: { icon: Flame, className: 'bg-danger-soft text-danger-ink' },
   achievement: { icon: Sparkles, className: 'bg-warning-soft text-warning-ink' },
+  billing: { icon: CreditCard, className: 'bg-primary-soft text-primary-ink' },
   system: { icon: Info, className: 'bg-surface-2 text-fg-soft' },
 }
 

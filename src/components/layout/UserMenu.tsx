@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ChevronDown, CircleHelp, LogOut, Settings, ShieldCheck, User } from 'lucide-react'
+import { ChevronDown, CircleHelp, Gem, LogOut, Settings, ShieldCheck, User } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { PATHS } from '@/routes/paths'
 import { toast } from '@/stores/toastStore'
@@ -13,6 +13,7 @@ export function UserMenu() {
 
   const items: DropdownItem[] = [
     { label: 'Meu perfil', icon: <User />, onSelect: () => navigate(PATHS.profile) },
+    { label: 'Meu plano', icon: <Gem />, onSelect: () => navigate(PATHS.plan) },
     { label: 'Configurações', icon: <Settings />, onSelect: () => navigate(PATHS.settings) },
     { label: 'Central de ajuda', icon: <CircleHelp />, onSelect: () => navigate(PATHS.help) },
     ...(isAdmin ? [{ label: 'Painel administrativo', icon: <ShieldCheck />, onSelect: () => navigate(PATHS.admin) }] : []),

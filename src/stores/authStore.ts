@@ -19,6 +19,8 @@ interface AuthState {
   completeOnboarding: (answers: Omit<OnboardingAnswers, 'completedAt'>) => Promise<User>
   /** Recarrega os dados do usuário após operações que substituem dados (ex.: restaurar demo). */
   refreshData: () => void
+  /** Atualiza o usuário após operações de outros serviços (ex.: assinatura). */
+  setUser: (user: User) => void
   signOutLocally: () => void
 }
 
@@ -73,6 +75,10 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
   refreshData() {
     resetUserStores()
+  },
+
+  setUser(user) {
+    set({ user })
   },
 
   signOutLocally() {

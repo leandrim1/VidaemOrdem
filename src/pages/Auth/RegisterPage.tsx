@@ -56,7 +56,7 @@ export default function RegisterPage() {
     <AuthLayout
       documentTitle="Criar conta"
       title="Crie sua conta grátis"
-      description="Leva menos de um minuto. Sem cartão de crédito."
+      description="7 dias grátis, sem cartão de crédito e sem cobrança automática."
       footer={
         <>
           Já tem uma conta?{' '}

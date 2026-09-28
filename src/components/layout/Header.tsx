@@ -3,6 +3,7 @@ import { useTheme } from '@/hooks/useTheme'
 import { usePreferencesStore } from '@/stores/preferencesStore'
 import { IconButton } from '@/components/ui/IconButton'
 import { Logo } from '@/components/ui/Logo'
+import { TrialChip } from '@/components/billing/TrialChip'
 import { NotificationCenter } from './NotificationCenter'
 import { QuickAdd } from './QuickAdd'
 import { UserMenu } from './UserMenu'
@@ -32,6 +33,9 @@ export function Header({ onOpenMenu }: HeaderProps) {
       </div>
 
       <div className="ml-auto flex items-center gap-1 sm:gap-1.5">
+        <div className="mr-1 hidden md:block">
+          <TrialChip />
+        </div>
         <div className="hidden sm:block">
           <QuickAdd />
         </div>

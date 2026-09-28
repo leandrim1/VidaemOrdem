@@ -20,5 +20,6 @@ export const PATHS = {
   profile: '/app/perfil',
   settings: '/app/configuracoes',
   help: '/app/ajuda',
+  plan: '/app/plano',
   admin: '/admin',
 } as const

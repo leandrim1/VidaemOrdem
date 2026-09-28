@@ -12,6 +12,7 @@ const GUIDES = [
 ]
 
 const FAQ = [
+  { question: 'Serei cobrado automaticamente após o teste grátis?', answer: 'Não. O teste de 7 dias não pede cartão e nada é cobrado automaticamente. Acompanhe os dias restantes em "Meu plano" e escolha um plano quando quiser continuar.' },
   { question: 'Meus dados ficam salvos onde?', answer: 'Nesta versão, seus dados ficam armazenados no navegador deste dispositivo, separados por conta. Em breve teremos sincronização segura na nuvem entre dispositivos.' },
   { question: 'Como funcionam os pontos e níveis?', answer: 'Você ganha pontos ao concluir tarefas (+10), hábitos (+5), checklists (+20), metas (+50) e o desafio de 7 dias (+100). São 5 níveis: Começando, Em organização, Organizado, Consistente e Vida em Ordem.' },
   { question: 'Como escondo meus valores em público?', answer: 'Clique no ícone de olho no topo da tela ou ative "Ocultar valores" em Configurações → Privacidade. Todos os saldos e valores ficam mascarados.' },

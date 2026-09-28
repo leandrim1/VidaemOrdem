@@ -1,8 +1,13 @@
 import { Suspense, useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { useMembership } from '@/hooks/useMembership'
+import { useMembershipReminders } from '@/hooks/useMembershipReminders'
+import { PATHS } from '@/routes/paths'
 import { cn } from '@/lib/cn'
 import { usePreferencesStore } from '@/stores/preferencesStore'
 import { LoadingState } from '@/components/ui/States'
+import { Paywall } from '@/components/billing/Paywall'
+import { TrialBanner } from '@/components/billing/TrialBanner'
 import { Header } from './Header'
 import { MobileDrawer } from './MobileDrawer'
 import { MobileNav } from './MobileNav'
@@ -13,11 +18,19 @@ import { Sidebar } from './Sidebar'
  * - Desktop (≥1024px): sidebar fixa, recolhível pelo usuário.
  * - Tablet (768–1023px): sidebar em modo compacto (ícones) + gaveta completa.
  * - Mobile (<768px): gaveta + navegação inferior.
+ *
+ * Quando o teste grátis ou a assinatura termina, as páginas dão lugar à tela
+ * de planos — exceto plano, perfil, configurações e ajuda (os dados nunca
+ * ficam presos: exportação e exclusão continuam disponíveis).
  */
+const ALWAYS_AVAILABLE: string[] = [PATHS.plan, PATHS.profile, PATHS.settings, PATHS.help]
 export function AppLayout() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const collapsed = usePreferencesStore((s) => s.sidebarCollapsed)
   const { pathname } = useLocation()
+  const { access } = useMembership()
+  useMembershipReminders(access)
+  const blocked = access?.state === 'expired' && !ALWAYS_AVAILABLE.some((path) => pathname.startsWith(path))
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -52,9 +65,8 @@ export function AppLayout() {
       <div className={cn('flex min-h-dvh min-w-0 flex-col md:pl-[76px]', collapsed ? 'lg:pl-[76px]' : 'lg:pl-[264px]')}>
         <Header onOpenMenu={() => setDrawerOpen(true)} />
         <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-[1400px] flex-1 px-4 pt-6 pb-28 outline-none sm:px-6 md:pb-12 lg:px-8 lg:pt-8">
-          <Suspense fallback={<LoadingState variant="page" />}>
-            <Outlet />
-          </Suspense>
+          <TrialBanner />
+          <Suspense fallback={<LoadingState variant="page" />}>{blocked && access ? <Paywall access={access} /> : <Outlet />}</Suspense>
         </main>
       </div>
 

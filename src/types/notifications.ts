@@ -1,6 +1,6 @@
 import type { ISODateTime } from './common'
 
-export type NotificationKind = 'bill' | 'task' | 'goal' | 'habit' | 'achievement' | 'system'
+export type NotificationKind = 'bill' | 'task' | 'goal' | 'habit' | 'achievement' | 'billing' | 'system'
 
 export interface Notification {
   id: string

@@ -34,6 +34,13 @@ export const notificationsService = {
     return save([])
   },
 
+  /** Cria a notificação apenas uma vez por `key` (ex.: lembrete de fim do teste). */
+  async pushOnce(key: string, input: Omit<Notification, 'id' | 'createdAt' | 'read'>): Promise<Notification[]> {
+    const items = readCollection<Notification>(COLLECTIONS.notifications)
+    if (items.some((n) => n.id === key)) return items.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    return save([{ ...input, id: key, createdAt: new Date().toISOString(), read: false }, ...items])
+  },
+
   async push(input: Omit<Notification, 'id' | 'createdAt' | 'read'>): Promise<Notification[]> {
     const notification: Notification = { ...input, id: createId(), createdAt: new Date().toISOString(), read: false }
     return save([notification, ...readCollection<Notification>(COLLECTIONS.notifications)])

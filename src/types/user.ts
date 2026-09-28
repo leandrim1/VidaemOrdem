@@ -1,3 +1,4 @@
+import type { Membership } from './billing'
 import type { ISODateTime } from './common'
 
 export type UserRole = 'user' | 'admin'
@@ -22,6 +23,8 @@ export interface User {
   createdAt: ISODateTime
   onboarding?: OnboardingAnswers
   isDemo?: boolean
+  /** Ausente em contas antigas: o teste é calculado a partir de `createdAt`. */
+  membership?: Membership
 }
 
 export interface Credentials {

@@ -28,6 +28,7 @@ const ChallengePage = lazy(() => import('@/pages/Challenge/ChallengePage'))
 const ProfilePage = lazy(() => import('@/pages/Profile/ProfilePage'))
 const SettingsPage = lazy(() => import('@/pages/Settings/SettingsPage'))
 const HelpPage = lazy(() => import('@/pages/Help/HelpPage'))
+const PlanPage = lazy(() => import('@/pages/Plan/PlanPage'))
 const AdminDashboardPage = lazy(() => import('@/pages/Admin/AdminDashboardPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFound/NotFoundPage'))
 
@@ -103,6 +104,7 @@ export const router = createBrowserRouter([
           { path: 'perfil', element: page(ProfilePage) },
           { path: 'configuracoes', element: page(SettingsPage) },
           { path: 'ajuda', element: page(HelpPage) },
+          { path: 'plano', element: page(PlanPage) },
           { path: '*', element: page(NotFoundPage) },
         ],
       },

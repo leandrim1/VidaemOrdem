@@ -1,10 +1,11 @@
 import { addDays, addHours } from 'date-fns'
-import type { Credentials, OnboardingAnswers, RegisterInput, User } from '@/types'
+import type { Credentials, Membership, OnboardingAnswers, RegisterInput, User } from '@/types'
 import { createToken, hashPassword, verifyPassword, type PasswordHash } from '@/lib/crypto'
 import { delay } from '@/lib/delay'
 import { createId } from '@/lib/id'
 import { readJSON, storageKeys, writeJSON } from '@/lib/storage'
 import { DEMO_USER_ID, createMockUser } from '@/data/mockUser'
+import { createTrialMembership } from '@/utils/membership'
 import { ServiceError } from './errors'
 import { clearSession, readSession, requireUserId, writeSession } from './session'
 
@@ -105,6 +106,7 @@ export const authService = {
       email: normalized,
       role: 'user',
       createdAt: new Date().toISOString(),
+      membership: createTrialMembership(),
     }
     writeAccounts([...accounts, { user, password: await hashPassword(password) }])
     const { seedNewUserData } = await loadSeeds()
@@ -143,6 +145,14 @@ export const authService = {
   async saveOnboarding(answers: Omit<OnboardingAnswers, 'completedAt'>): Promise<User> {
     await delay(300)
     return updateStoredUser(requireUserId(), { onboarding: { ...answers, completedAt: new Date().toISOString() } })
+  },
+
+  /**
+   * Atualiza o plano do usuário atual. Chamado pelo billingService no modo
+   * mock; com um gateway real, quem atualiza o plano é o webhook no backend.
+   */
+  async setMembership(membership: Membership): Promise<User> {
+    return updateStoredUser(requireUserId(), { membership })
   },
 
   async changePassword(current: string, next: string): Promise<void> {

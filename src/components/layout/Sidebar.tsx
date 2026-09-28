@@ -5,6 +5,7 @@ import { useGamification } from '@/hooks/useGamification'
 import { PATHS } from '@/routes/paths'
 import { Logo, LogoMark } from '@/components/ui/Logo'
 import { ProgressBar } from '@/components/ui/ProgressBar'
+import { Skeleton } from '@/components/ui/States'
 import { FOOTER_NAV, NAV_GROUPS, type NavItem } from './navigation'
 
 interface SidebarProps {
@@ -41,7 +42,16 @@ function SidebarLink({ item, collapsed, onNavigate }: { item: NavItem; collapsed
 }
 
 function LevelCard({ onNavigate }: { onNavigate?: () => void }) {
-  const { level, points, progress, nextLevel } = useGamification()
+  const { level, points, progress, nextLevel, isLoading } = useGamification()
+  if (isLoading) {
+    return (
+      <div className="space-y-2.5 rounded-xl border border-line bg-surface-2/60 p-3" aria-hidden>
+        <Skeleton className="h-3.5 w-2/3" />
+        <Skeleton className="h-3 w-1/3" />
+        <Skeleton className="h-1 w-full" />
+      </div>
+    )
+  }
   return (
     <Link
       to={PATHS.profile}

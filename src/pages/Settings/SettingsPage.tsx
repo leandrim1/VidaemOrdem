@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Bell, Check, Database, Download, KeyRound, Monitor, Moon, Palette, Shield, Sun, Trash2, User } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { useAuth, useCurrentUser } from '@/hooks/useAuth'
+import { useMembership } from '@/hooks/useMembership'
 import { useTheme } from '@/hooks/useTheme'
 import { changePasswordSchema, type ChangePasswordValues } from '@/lib/schemas/auth'
 import { PATHS } from '@/routes/paths'
@@ -133,6 +134,7 @@ export default function SettingsPage() {
   const { logout } = useAuth()
   const navigate = useNavigate()
   const [section, setSection] = useState<Section>('conta')
+  const { statusLabel } = useMembership()
   const notificationsEnabled = usePreferencesStore((s) => s.notificationsEnabled)
   const [busy, setBusy] = useState<string | null>(null)
 
@@ -216,8 +218,15 @@ export default function SettingsPage() {
                   <dt className="text-muted">E-mail</dt>
                   <dd className="truncate font-medium text-fg">{user.email}</dd>
                 </div>
+                <div className="flex justify-between gap-4 py-3">
+                  <dt className="text-muted">Plano</dt>
+                  <dd className="text-right font-medium text-fg">{statusLabel}</dd>
+                </div>
               </dl>
               <div className="mt-4 flex flex-wrap justify-end gap-2">
+                <Button variant="outline" onClick={() => navigate(PATHS.plan)}>
+                  Gerenciar plano
+                </Button>
                 <Button variant="outline" onClick={() => navigate(PATHS.profile)}>
                   Editar perfil
                 </Button>

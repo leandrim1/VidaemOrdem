@@ -1,5 +1,6 @@
 import { subDays, subHours } from 'date-fns'
 import type { GamificationState, User } from '@/types'
+import { createTrialMembership } from '@/utils/membership'
 
 export const DEMO_USER_ID = 'demo-mariana'
 
@@ -10,6 +11,8 @@ export function createMockUser(): User {
     email: 'mariana@vidaemordem.app',
     role: 'admin',
     isDemo: true,
+    // Demonstração no meio do teste grátis (5 dias restantes).
+    membership: createTrialMembership(new Date(), 5),
     createdAt: subDays(new Date(), 94).toISOString(),
     onboarding: {
       mainGoal: 'tudo',

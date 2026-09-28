@@ -102,6 +102,7 @@ Para pagamentos (Stripe ou outro gateway), a página de preços já está pronta
 - **Contas, Cartões, Assinaturas, Metas, Tarefas, Rotina (dia/semana/mês), Hábitos (sequências + calendário), Documentos (apenas metadados), Organização digital, Checklists e Desafio 7 dias** com CRUD completo.
 - **Gamificação**: pontos (tarefa +10, hábito +5, checklist +20, meta +50, desafio +100), 5 níveis e histórico, sem pontuação duplicada.
 - **Central de notificações** com lido/não lido, filtros e exclusão.
+- **Teste grátis e planos**: 7 dias grátis **sem cartão e sem cobrança automática**, contagem regressiva no cabeçalho, aviso nos últimos 3 dias (banner + notificação), página **Meu plano** (`/app/plano`) com planos Semanal, Mensal e Anual, cancelamento/reativação e tela de planos ao fim do teste — perfil, configurações, ajuda e exportação de dados continuam acessíveis (os dados nunca ficam presos). O checkout é simulado em `src/services/billingService.ts`, pronto para ser trocado pelo checkout hospedado do gateway (Stripe, Mercado Pago, Pagar.me…) com atualização do plano via webhook no backend.
 - **Configurações**: tema claro/escuro/sistema, notificações, "ocultar valores", exportação de dados (JSON), restaurar/apagar dados e excluir conta.
 - **Admin**: métricas, receita, planos, cadastros, funil do desafio e tabela de usuários.
 
